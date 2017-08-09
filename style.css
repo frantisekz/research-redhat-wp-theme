@@ -1,0 +1,403 @@
+/*
+Theme Name: Red Hat Research
+Theme URI: http://research.redhat.com
+Description: Child theme for research.redhat.com
+Author: František Zatloukal
+Author URI: http://frantisek.zatloukalu.eu
+Template: rh-parent
+Version: 1.1
+*/
+
+/* ALL SITE */
+html {
+  overflow-x: hidden;
+}
+
+.more-link {
+  display: none;
+}
+
+.taxonomy-description {
+  display: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #cc0000;
+}
+
+.site-header .right-overlay img {
+  margin-left: -260px;
+}
+
+.utility-bar {
+  display: none;
+}
+
+.site-branding {
+  padding: 40px 0;
+}
+
+.site-name {
+  width: 85%;
+  font-size: 3em;
+}
+
+.main-navigation {
+  background: #b1b1b1;
+}
+
+.menu-primary-container > ul > li > a {
+  color: black;
+}
+
+.social-footer {
+  font-size: 2em;
+}
+
+.social-footer i {
+  margin-right: 10px;
+}
+
+.social-footer a:hover {
+  color: #cc0000;
+}
+
+/* SECTION: Front Categories */
+
+#front-categories {
+  background-color: #d7d7d7;
+  min-height: 520px;
+  padding-top: 60px;
+}
+
+#front-pre-footer {
+  background-color: #d7d7d7;
+  padding-top: 100px;
+  padding-bottom: 100px;
+}
+
+.front-container {
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+.front-site-content {
+  padding: 0px 0;
+}
+
+.front-item {
+  cursor: pointer;
+  overflow: hidden;
+  background-color: white;
+  margin-bottom: 25px;
+}
+
+.front-thumb-img img {
+  width: 100%;
+  transition: all 0.25s ease;
+  margin: 0 auto;
+}
+
+.front-item p {
+  padding-right: 8px;
+  padding-left: 8px;
+}
+
+.front-thumb-img {
+  width: 100%;
+  overflow: hidden;
+}
+
+.front-meta {
+  height: 100%;
+}
+
+.front-item:hover > .front-meta {
+	background-color: #cc0000;
+}
+
+.front-item:hover > .front-meta h2{
+	color: white;
+}
+
+
+.front-item:hover > .front-meta p{
+	color: white;
+}
+
+.front-item:hover > .page-header{
+	color: white;
+}
+
+.front-item:hover > .front-thumb-img img {
+  transform:scale(1.25);
+}
+
+.front-item p {
+  font-size: 0.9em;
+  margin: 0;
+}
+
+.front-item {
+  margin-bottom: 25px;
+}
+
+.front-disabled {
+  background-color: rgba(0,0,0,0.1) !important;
+  pointer-events: none;
+}
+
+@media only screen and (min-width: 769px) {
+	.front-item {
+		height: 400px;
+	}
+}
+
+.page-header {
+  border-bottom: 0px;
+}
+
+.site-name {
+  margin-bottom: 0px;
+}
+
+.sub-description {
+  margin-left: 250px;
+  color: black;
+  font-size: 2.7em;
+  font-weight: 800;
+}
+
+/* SECTION: Front Intro */
+#front-intro {
+  background-color: white;
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+#front-intro h3, h6 {
+  color: black;
+}
+
+#front-pre-footer h3, h6 {
+  color: black;
+}
+
+/* PROJECT LISTING */
+.master-reset-btn {
+  margin-bottom: 1em;
+  float: right;
+}
+
+.project-tags {
+  border-radius: 25px;
+  color: black;
+  margin-right: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.project-tags a {
+  color: black;
+}
+
+.diploma-tag {
+  margin-right: 1em;
+  padding: 0.2em;
+  border: 1px solid grey;
+  background-color: #a0a0a0;
+}
+
+.project-inner {
+  padding: 0.5em;
+  border: 1px solid black;
+}
+
+.project-box {
+  cursor: pointer;
+  position: relative;
+  height: auto;
+  padding: 1em;
+  background-color: inherit;
+  background-clip: content-box;
+  color: black;
+}
+
+.project-box a {
+  color: #333333;
+}
+
+.project-box:hover {
+  background-color: #36959E;
+  color: white;
+}
+
+.project-box:hover > .project-box a {
+  color: white !important;
+}
+
+@media only screen and (min-width: 992px) {
+  #rnd-listing-container {
+    border-left: 1px solid grey;
+  }
+}
+
+/* SINGLE PROJECT */
+.city {
+  font-size: 1.4em;
+}
+
+.university {
+  font-size: 1.4em;
+}
+
+.city-notice {
+  border-bottom: 2px solid #f0f0f0;
+  color: black;
+}
+
+.textarea-wrap textarea {
+  height: 100px !important;
+}
+
+.listing-header {
+  padding-bottom: 25px;
+}
+
+.single-project-meta {
+  padding-bottom: 2em;
+}
+
+/* HARD-CODED ID's to form below project */
+#ninja_forms_field_11_div_wrap {
+  width: 48%;
+  float: left;
+}
+
+#ninja_forms_field_12_div_wrap {
+  width: 48%;
+  float: right;
+}
+
+/* SIDEBAR */
+.sidebar {
+	display: block;
+  background-color: #333333;
+  width: 27.0%;
+}
+
+.all-events {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    text-align: center;
+    width: 100%;
+    font-size: 3em;
+    /* color: white; */
+    background-color: red;
+    color: white;
+    cursor: pointer;
+}
+
+div.front-sidebar {
+	position: fixed;
+	right: 0px;
+	top: 214px;
+	z-index: 999;
+}
+
+div.arrow {
+	border-radius: 6px;
+	width: 50px;
+	height: 250px;
+	background-color: #EC7A08;
+	font-size: 27px;
+	position: relative;
+	padding-top: 190px;
+	cursor:pointer;
+}
+
+div.arrow a {
+	color: white;
+}
+
+#enlrg {
+	transform: rotate(-90deg);
+	-webkit-transform: rotate(-90deg);
+	display: inherit;
+  white-space: nowrap;
+}
+
+#ensml {
+	transform: rotate(-90deg);
+	-webkit-transform: rotate(-90deg);
+	display: none;
+  white-space: nowrap;
+}
+
+div.front-sidebar > div.sidebar {
+	position: fixed;
+	right: -28%;
+	top: 214px;
+	height: 75%;
+  overflow: auto;
+}
+
+@media only screen and (min-height: 1500px) {
+	div.front-sidebar > div.sidebar {
+		height: 1200px;
+	}
+}
+
+@media only screen and (min-width: 2560px) {
+	div.front-sidebar > div.sidebar {
+		right: 0%;
+	}
+	.sidebar {
+		margin-right: 1%;
+		right: 0%;
+	}
+	.arrow {
+		display: none;
+	}
+}
+
+@media only screen and (max-width: 2559px) {
+	.arrow {
+		display: inherit;
+	}
+}
+
+@media only screen and (min-width: 1921px) {
+	div.front-sidebar > div.sidebar {
+		width: 15%;
+	}
+}
+
+.sidebar ul {
+  list-style-type: none;
+  padding-top: 5px;
+  padding-left: 5px
+}
+
+.eventswidget {
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.eventswidget img {
+  display: none;
+}
+
+.eventswidget .title a {
+  color: white;
+  font-size: 2.1em;
+}
+
+.eventswidget .title a:hover {
+  color: #cc0000;
+}
+
+.eventswidget .excerpt {
+  color: white;
+}

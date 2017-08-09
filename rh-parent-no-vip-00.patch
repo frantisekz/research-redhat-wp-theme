@@ -1,0 +1,25 @@
+--- wp-content/themes/rh-parent-original/inc/template-tags.php
++++ wp-content/themes/rh-parent/inc/template-tags.php
+@@ -52,7 +52,7 @@
+ 
+     echo '<div class="posted-on">Posted on: ' . $time_string . '</div>';
+ 
+-    $coauthors = get_coauthors();
++    /*$coauthors = get_coauthors();
+ 
+     foreach($coauthors as $coauthor){
+             echo '<p>';
+@@ -83,7 +83,7 @@
+             echo '<span class="author-company '. esc_attr( $redhatClass ) .'">' . esc_html( $coauthor->company_name ) . ' </span> ';
+             echo '</span>';
+             echo '</p>';
+-    }
++    }*/
+ }
+ endif;
+ 
+@@ -159,4 +159,4 @@
+ 	delete_transient( 'rh_parent_categories' );
+ }
+ add_action( 'edit_category', 'rh_parent_category_transient_flusher' );
+-add_action( 'save_post',     'rh_parent_category_transient_flusher' );+add_action( 'save_post',     'rh_parent_category_transient_flusher' );

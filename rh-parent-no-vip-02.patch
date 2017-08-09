@@ -1,0 +1,14 @@
+--- wp-content/themes/rh-parent-original/inc/custom-author.php
++++ wp-content/themes/rh-parent/inc/custom-author.php
+@@ -1,5 +1,5 @@
+ <?php
+-add_action( 'show_user_profile', 'rh_parent_add_user_title_field' );
++/*add_action( 'show_user_profile', 'rh_parent_add_user_title_field' );
+ add_action( 'edit_user_profile', 'rh_parent_add_user_title_field' );
+ 
+ function rh_parent_add_user_title_field( $user )
+@@ -26,3 +26,4 @@
+ 	update_user_attribute( $user_id, 'user_job_title', sanitize_text_field( $_POST['user_job_title'] ) );
+ 	update_user_attribute( $user_id, 'user_company_name', sanitize_text_field( $_POST['user_company_name'] ) );
+ }
++*/

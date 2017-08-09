@@ -1,0 +1,42 @@
+--- wp-content/themes/rh-parent-original/functions.php
++++ wp-content/themes/rh-parent/functions.php
+@@ -6,13 +6,13 @@
+  */
+ 
+ // Init WP.com VIP environment
+-require_once( WP_CONTENT_DIR . '/themes/vip/plugins/vip-init.php');
++// require_once( WP_CONTENT_DIR . '/themes/vip/plugins/vip-init.php');
+ 
+ /**
+  * Add Plugins
+  */
+-wpcom_vip_load_plugin( 'co-authors-plus');
+-wpcom_vip_load_plugin( 'wp-page-numbers');
++// wpcom_vip_load_plugin( 'co-authors-plus');
++// wpcom_vip_load_plugin( 'wp-page-numbers');
+ 
+ /**
+  * Enable a custom permastruct, if the site wants to use one that's not the WP.com default (/yyyy/mm/dd/post-name/)
+@@ -255,7 +255,7 @@
+ }
+ 
+ // Enabling OpenGraph tags
+-wpcom_vip_enable_opengraph();
++// wpcom_vip_enable_opengraph();
+ 
+ // Default Gravatar Image
+ 
+@@ -292,11 +292,11 @@
+ }
+ 
+ // Allow editors to manage users
+-add_action( 'init', function() {
++/* add_action( 'init', function() {
+     wpcom_vip_add_role_caps( 'editor', array( 'list_users' ) );
+     wpcom_vip_add_role_caps( 'editor', array( 'promote_users' ) );
+     wpcom_vip_add_role_caps( 'editor', array( 'add_users' ) );
+-} );
++} ); */
+ 
+ /**
+  * Implement the Custom Header feature.
