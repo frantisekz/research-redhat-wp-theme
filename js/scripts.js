@@ -1,6 +1,17 @@
 ids = [null, null]; /* [city_id, tag_id]*/
 default_texts = {university_drop_down: jQuery("#university_drop_down").text(), city_drop_down: jQuery("#city_drop_down").text(), spec_drop_down: jQuery("#spec_drop_down").text()};
 
+/* https://stackoverflow.com/a/25359264/6251429 */
+jQuery.urlParam = function(name){
+  var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+  if (results==null){
+     return null;
+  }
+  else{
+     return decodeURI(results[1]) || 0;
+  }
+}
+
 function mark_as_active(active_id, inactive_id) {
   if (active_id != 0) {
     jQuery("#trigger-" + active_id).css('background', '#cc0000');
@@ -108,48 +119,8 @@ function reset_filter(flush_array) {
   jQuery('.project-box').css('display', 'initial');
 }
 
-function events_scrollable() {
-  jQuery('.eventswidget').css('max-height', jQuery('.sidebar').height() - jQuery('.all-events').height() - 10);
-}
-
-jQuery(document).ready(function() {
-  events_scrollable();
-  jQuery('#enlrg').click(function() {
-    if (jQuery(window).width() > 1920) {
-      jQuery('.front-sidebar').animate({right: '15%'});
-    }
-    else {
-      jQuery('.front-sidebar').animate({right: '27%'});
-    }
-    jQuery('.sidebar').animate({right: '0%'});
-    jQuery('#enlrg').css('display', 'none');
-    jQuery('#ensml').css('display', 'inherit');
-  });
-
-  jQuery('#ensml').click(function() {
-    if (jQuery(window).width() < 2560) {
-      jQuery('.front-sidebar').animate({right: '0%'});
-      jQuery('.sidebar').animate({right: '-27%'});
-      jQuery('#enlrg').css('display', 'inherit');
-      jQuery('#ensml').css('display', 'none');
-    }
-  });
-});
-
-var eventFired = 0;
-
-jQuery(window).on('resize', function() {
-if (!eventFired) {
-  events_scrollable();
-  if (jQuery(window).width() > 2559) {
-      if (jQuery('.arrow').css('display') != 'none') {
-        jQuery("#enlrg").simulate("click");
-        jQuery('.arrow').css('display', 'none');
-      }
-  }
-  else if (jQuery('.arrow').css('display') != 'inherit') {
-    jQuery("#ensml").simulate("click");
-    jQuery('.arrow').css('display', 'inherit');
-  }
+jQuery(document).ready(function () {
+  if(window.location.href.indexOf('university') > -1) {
+    jQuery('#trigger-' + jQuery.urlParam('university')).simulate('click');
   }
 });

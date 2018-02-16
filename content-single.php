@@ -12,12 +12,6 @@
 
 	<div class="entry-content">
 		<?php the_content('',FALSE,''); ?>
-		<?php
-			wp_link_pages( array(
-				'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'rh_parent' ),
-				'after'  => '</div>',
-			) );
-		?>
 	</div><!-- .entry-content -->
 
 	<footer class="entry-footer">

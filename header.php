@@ -1,5 +1,5 @@
 <?php
-/*if (is_secure_ssl()) {
+if (is_secure_ssl()) {
     $redirect = 'https://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
     header('HTTP/1.1 301 Moved Permanently');
     header('Location: ' . $redirect);
@@ -9,7 +9,7 @@
 if (!is_ssl()) {
     wp_redirect('https://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'], 301 );
     exit();
-}*/
+}
 
 /**
  * The header for our theme.
@@ -56,11 +56,23 @@ if (!is_ssl()) {
 		<nav id="site-navigation" class="main-navigation" role="navigation">
 			<div class="container">
 				<div class="menu-toggle"><span class="menu-icon"></span> <?php esc_html_e( 'Main Menu', 'rh_parent' ); ?></div>
-				<?php wp_nav_menu( array( 'theme_location' => 'primary', 'menu_id' => 'primary-menu', 'menu_class' => 'primary-nav', 'container_class' => 'menu-primary-container' ) ); ?>
+				<?php 
+				wp_nav_menu( array(
+					'menu'              => 'primary',
+					'theme_location'    => 'primary',
+					'depth'             => 2,
+					'container'         => 'div',
+					'container_class'   => 'collapse navbar-collapse menu-primary-container',
+					'container_id'      => 'bs-example-navbar-collapse-1',
+					'menu_class'        => 'nav navbar-nav primary-nav',
+					'fallback_cb'       => 'wp_bootstrap_navwalker::fallback',
+					'walker'            => new wp_bootstrap_navwalker())
+				);
+				?>
 			</div>
 		</nav><!-- #site-navigation -->
 	</header><!-- #masthead -->
 
-	<div id="content" class="site-content">
-		<div class="container">
+	<div id="content" class="site-content <?php global $RH_LISTINGS; if (is_front_page()) {echo 'front-site-content';}if ((in_array(basename(get_permalink()), $RH_LISTINGS) != true) && (is_search() != true)) echo ' white-site-content'; ?>">
+		<div class="<?php echo is_front_page() ? 'container-fluid front-container' : 'container'; ?>">
 			<div class="row">

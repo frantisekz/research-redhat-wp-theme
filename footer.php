@@ -10,12 +10,27 @@
 			</div><!-- .row -->
 		</div><!-- .container -->
 	</div><!-- #content -->
-
+	<div class="modal fade" tabindex="-1" role="dialog" id="get_in_touch_footer">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							<h4 class="modal-title">Get in touch!</h4>
+						</div>
+						<div class="modal-body">
+							<?php if (function_exists('Ninja_Forms')) { Ninja_Forms()->display(/* $FOOTER_CONTACT_ID) FIXME*/ 1); } ?>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						</div>
+						</div><!-- /.modal-content -->
+					</div><!-- /.modal-dialog -->
+				</div><!-- /.modal -->
 	<footer class="site-footer" role="contentinfo">
 		<div class="container">
 			<div class="site-info row">
-				<div class="col-md-10"></div>
-				<div class="col-md-2 text-left">
+				<div class="col-md-9 text-center"><p style="font-size: 1.8em; color: white; margin: 0px;">Didn't find what you were looking for? <a id="footer_touch" data-toggle="modal" data-target="#get_in_touch_footer"><strong>Get in touch!</strong></a></p></div>
+				<div class="col-md-3 text-left">
 						<div class="text-left social-footer">
 							<a title="Red Hat" href="http://www.redhat.com">
 									<img alt="Red Hat logo" style="margin-bottom: 5px;" src="<?php echo esc_url( get_template_directory_uri() );?>/img/l_redhat-reverse.png">
@@ -25,10 +40,6 @@
 							<a href="https://www.youtube.com/channel/UCIHsqY_4eWeInVQnxZ7WSjg" target="_blank"><i class="fa fa-youtube" aria-hidden="true"></i></a>
 							<a href="https://twitter.com/redhatcz" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
 						</div>
-				</div>
-				<div class="col-md-12 text-center">
-				<?php wp_nav_menu( array( 'theme_location' => 'footer-menu' ) ); ?>
-					<p style="font-size: 1.1em;">Didn't find what you were looking for? <a href="mailto:mhrusovs@redhat.com">Contact <strong>mhrusovs@redhat.com</strong></a></p>
 				</div>
 			</div><!-- .site-info -->
 		</div>
