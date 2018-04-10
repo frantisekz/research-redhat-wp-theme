@@ -20,7 +20,7 @@ get_header(); ?>
 </style>
 
 	<div id="primary" class="content-area col-sm-12">
-		
+
 		<main id="main" class="site-main" role="main">
 			<h1 style="color: white;"><?php the_title(); ?></h1>
 	<section id="rnd-listing">
@@ -45,7 +45,7 @@ get_header(); ?>
             'ignore_sticky_posts' => 1,
             );
 			  $my_query = null;
-        	  $my_query = new WP_Query($args); 
+        	  $my_query = new WP_Query($args);
 			  remove_filter('term_description','wpautop');
 
 			  while ($my_query->have_posts()) : $my_query->the_post();
@@ -55,15 +55,30 @@ get_header(); ?>
 				  $past_event = 1;
 			  }
               ?>
-              <div onclick="window.location='<?php echo the_permalink(); ?>';" class="col-md-12 project-box" <?php if ($past_event == 1) {echo 'style="display: none;"';} ?>>
-			  <div class="project-inner">
-				  <div class="row">
-						<div class="col-md-12">
-							<p class="project-heading"><?php the_title(); ?></p>
-						</div>
+              <div onclick="window.location='<?php echo the_permalink(); ?>';" class="col-md-12 project-box" <?php if ($past_event == 1) {echo 'style="display: none;"';} else {echo 'style="display: flex;"';}?>>
+
+				  <?php
+				  	$thumb_id = get_post_thumbnail_id();
+					$thumb_url_array = wp_get_attachment_image_src($thumb_id, 'thumbnail-size', true);
+					$thumb_url = $thumb_url_array[0];
+				  ?>
+
+				<div class="event-img" style="background-image: url('<?php echo $thumb_url; ?>')">
+					<div class="pattern">
+					  <div class="picture">
+
+					  </div>
 					</div>
-			<?php the_content(); ?>
-			</div>
+		        </div>
+
+			  <div class="project-inner" >
+				  <div class="row">
+					  <div class="col-md-12">
+						  <p class="project-heading"><?php the_title(); ?></p>
+					  </div>
+				  </div>
+				<?php the_content(); ?>
+			  </div>
 			</div>
             <?php endwhile;
             add_filter('term_description','wpautop');
@@ -81,7 +96,7 @@ get_header(); ?>
             'ignore_sticky_posts' => 1,
             );
 			  $my_query = null;
-        	  $my_query = new WP_Query($args); 
+        	  $my_query = new WP_Query($args);
 			  remove_filter('term_description','wpautop');
 
 			  while ($my_query->have_posts()) : $my_query->the_post();

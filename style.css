@@ -18,7 +18,7 @@ body {
   font-size: 16px;
 }
 
-html, 
+html,
 body {
     height: 100%;
 }
@@ -283,7 +283,29 @@ li.current-menu-item a{
 }
 
 .project-inner {
-  padding: 0.5em;
+  width: 55%;
+  margin: 1.5em;
+  float: left;
+}
+
+.pattern {
+  background-image: url("patterns-021.png");
+  background-repeat: repeat-y;
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+  width: 35%;
+  background-size: 60px 60px;
+}
+
+
+.event-img {
+  width: 35%;
+  float: left;
+  margin: 29px;
+  display: flex;
+  vertical-align: middle;
+  text-align: center;
 }
 
 .past-project {
@@ -302,6 +324,7 @@ li.current-menu-item a{
   background: white;
   background-clip: content-box;
   color: black;
+  transition: background-color 0.5s ease;
 }
 
 .project-box a {
@@ -309,17 +332,9 @@ li.current-menu-item a{
 }
 
 .project-box:hover {
-  background-color: #333333;
-  color: white;
+  background-color: #d8d8d8;
 }
 
-.project-box:hover > .project-box a {
-  color: white !important;
-}
-
-.project-box:hover > .project-box p {
-  color: white !important;
-}
 
 .project-heading {
   font-weight: 700;
