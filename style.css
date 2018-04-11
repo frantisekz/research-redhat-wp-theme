@@ -306,6 +306,8 @@ li.current-menu-item a{
   display: flex;
   vertical-align: middle;
   text-align: center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .past-project {
