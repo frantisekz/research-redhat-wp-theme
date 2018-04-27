@@ -146,10 +146,8 @@ get_header(); ?>
 						$max_applicants = $thesis_with_this + 1;
 					}
 					
-					var_dump($thesis_with_this);
 					var_dump($max_applicants);
-					exit;
-					
+					var_dump($thesis_with_this);
 					
 					if ($thesis_with_this < $max_applicants) {
 						if((is_user_logged_in()) && (function_exists('Ninja_Forms'))) {
