@@ -61,9 +61,9 @@ get_header(); ?>
 			<div class="row">
 			<?php
 
-				$this_id = get_the_ID(); // Save current ID
+				// $my_query -> vypis vsech diplomas pro vykreslovani topics
 				$args=array(
-					'post_type' => 'theses',
+					'post_type' => 'diplomas',
 					'post_status' => 'publish',
 					'orderby'     => 'modified',
 					'posts_per_page' => -1,
@@ -80,49 +80,70 @@ get_header(); ?>
 						)));
 				$my_query = new WP_Query($args);
 
+				// $my_query_calc -> vypis vsech theses pro pocitani povolenych uchazecu (pouzijeme jako jednu z promennych pri vypoctu)
+				$args_calc=array(
+					'post_type' => 'theses',
+					'post_status' => 'publish',
+					'orderby'     => 'modified',
+					'posts_per_page' => -1,
+					'ignore_sticky_posts' => 1,
+					'these_not_full'=> 'yes',
+					'tax_query' => array(
+						array(
+							'taxonomy' => 'topic_allowed_applicants',
+							'field' => 'slug',
+							'terms' => array(
+								'0'
+							),
+							'operator' => 'NOT IN'
+						)));
+				$my_query_calc = new WP_Query($args_calc);
+
 				remove_filter('term_description','wpautop');
 
 				while ($my_query->have_posts()) : $my_query->the_post();
 				$terms_uni = wp_get_post_terms(get_the_ID(), 'parrent_university');
 				$terms_category = wp_get_post_terms(get_the_ID(), 'these_category');
 
-				$this_id = get_the_ID();
-
-				// zabrani nekonecnemu cyklu - neni trvale reseni
-				function wpse_add_new_post_id_to_table( $post_id ) {
-					global $wpdb;
-
-					$post_status = get_post_status( $post_id );
-
-					if ( 'publish' != $post_status )
-						return false;
-
-					$wpdb->insert( 'wp_posts', array( 'post_id' => $post_id ) );
-
-				}
-				add_action( 'wp_insert_post', 'wpse_add_new_post_id_to_table' );
-
 				if( $my_query->have_posts() ) {
-					$thesis_with_this = 0;
-					while ($my_query->have_posts()) : $my_query->the_post();
-						$terms_topics = wp_get_object_terms(get_the_ID(), 'diplomas');
-						foreach ($terms_topics as $terms_topic) {
-							if ($terms_topic->term_id == $this_id) {
-								$thesis_with_this = $thesis_with_this + 1;
-							}
-						}
-					endwhile;
+
+					// $this_id -> id aktualniho topicu
+					$this_id = get_the_ID();
+					// $this_id = '1946';
+
+					// $post_name -> hodnota podle ktere budeme filtrovat/hledat shody
+					$sql = $wpdb->get_results("SELECT post_name FROM wp_posts WHERE id={$this_id}", ARRAY_A);
+					$merged_sql = array_merge(...$sql);
+					$post_name = $merged_sql['post_name'];
+					// var_dump($post_name);
+
+					// $sql_same -> dotaz na db aby nasla shodu
+					$sql_same = $wpdb->get_results("SELECT * FROM wp_posts WHERE post_name='{$post_name}' AND post_type='theses'");
+
+					// $count -> pocet shod
+					$count = count($sql_same);
+
+					// var_dump($count);
+
 				}
+
 				$temp_terms = wp_get_post_terms($this_id, 'topic_allowed_applicants');
+
+				// var_dump($temp_terms);
+
 				foreach ($temp_terms as $temp_term) {
 					$max_applicants = $temp_term->name;
 					break;
 				}
+
 				if (!isset($max_applicants)) {
-					$max_applicants = $thesis_with_this + 1;
+					$max_applicants = $count + 1;
 				}
 
-				if ($thesis_with_this < $max_applicants) {
+				 var_dump($count);
+				 var_dump($max_applicants);
+
+				if ($count < $max_applicants) {
 					if((is_user_logged_in()) && (function_exists('Ninja_Forms'))) {
 						$servername = "localhost";
 						$username = "root";
@@ -136,24 +157,26 @@ get_header(); ?>
 						   die("Connection failed: " . $conn->connect_error);
 						}
 
-						// zajisti prepsani prislusne diploma na 0/1 (podle stejneho $post_title)
-						$sql = $wpdb->get_results("SELECT post_title, post_type, active FROM wp_posts WHERE id={$this_id}", ARRAY_A);
-						$merged_sql = array_merge(...$sql);
-						$post_title = $merged_sql['post_title'];
-						
-						$sql = "UPDATE wp_posts SET active='1' WHERE post_title='{$post_title}' AND post_type='diplomas'";
-						
-						if ($conn->query($sql) === TRUE ) {
+						// zajisti prepsani prislusne diploma na 0/1 (podle stejneho post_name -> $post_name_change)
+						$sql_change = $wpdb->get_results("SELECT post_name, post_type, active FROM wp_posts WHERE id={$this_id}", ARRAY_A);
+						$merged_sql_change = array_merge(...$sql_change);
+						$post_name_change = $merged_sql['post_name'];
+
+						$sql_change = "UPDATE wp_posts SET active='1' WHERE post_name='{$post_name_change}' AND post_type='diplomas'";
+
+						if ($conn->query($sql_change) === TRUE ) {
 						   $last_id = $conn->insert_id;
 						} else {
-						   echo "Error: " . $sql . "<br>" . $conn->error;
+						   echo "Error: " . $sql_change . "<br>" . $conn->error;
 						}
 
 						$conn->close();
 					}
 				}
-				
-			  ?>
+
+				exit;
+
+				?>
 			  <a href="<?php echo the_permalink(); ?>">
 				<div class="col-md-12 project-box">
 				<div class="project-inner">
