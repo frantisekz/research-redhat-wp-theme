@@ -78,54 +78,31 @@ get_header(); ?>
 							),
 							'operator' => 'NOT IN'
 						)));
-				$my_query = new WP_Query($args);
-
-				// $my_query_calc -> vypis vsech theses pro pocitani povolenych uchazecu (pouzijeme jako jednu z promennych pri vypoctu)
-				$args_calc=array(
-					'post_type' => 'theses',
-					'post_status' => 'publish',
-					'orderby'     => 'modified',
-					'posts_per_page' => -1,
-					'ignore_sticky_posts' => 1,
-					'these_not_full'=> 'yes',
-					'tax_query' => array(
-						array(
-							'taxonomy' => 'topic_allowed_applicants',
-							'field' => 'slug',
-							'terms' => array(
-								'0'
-							),
-							'operator' => 'NOT IN'
-						)));
-				$my_query_calc = new WP_Query($args_calc);
-
+				$my_query = null;
+				$my_query = new WP_Query($args); 
 				remove_filter('term_description','wpautop');
 
 				while ($my_query->have_posts()) : $my_query->the_post();
 				$terms_uni = wp_get_post_terms(get_the_ID(), 'parrent_university');
 				$terms_category = wp_get_post_terms(get_the_ID(), 'these_category');
+				
+				// $this_id -> id aktualniho topicu
+				$this_id = get_the_ID();
+				$this_id = '1946';
 
-				if( $my_query->have_posts() ) {
+				// $post_name -> hodnota podle ktere budeme filtrovat/hledat shody
+				$sql = $wpdb->get_results("SELECT post_name FROM wp_posts WHERE id={$this_id}", ARRAY_A);
+				$merged_sql = array_merge(...$sql);
+				$post_name = $merged_sql['post_name'];
+				// var_dump($post_name);
 
-					// $this_id -> id aktualniho topicu
-					$this_id = get_the_ID();
-					// $this_id = '1946';
+				// $sql_same -> dotaz na db aby nasla shodu
+				$sql_same = $wpdb->get_results("SELECT * FROM wp_posts WHERE post_name='{$post_name}' AND post_type='theses'");
 
-					// $post_name -> hodnota podle ktere budeme filtrovat/hledat shody
-					$sql = $wpdb->get_results("SELECT post_name FROM wp_posts WHERE id={$this_id}", ARRAY_A);
-					$merged_sql = array_merge(...$sql);
-					$post_name = $merged_sql['post_name'];
-					// var_dump($post_name);
+				// $count -> pocet shod
+				$count = count($sql_same);
 
-					// $sql_same -> dotaz na db aby nasla shodu
-					$sql_same = $wpdb->get_results("SELECT * FROM wp_posts WHERE post_name='{$post_name}' AND post_type='theses'");
-
-					// $count -> pocet shod
-					$count = count($sql_same);
-
-					// var_dump($count);
-
-				}
+				// var_dump($count);
 
 				$temp_terms = wp_get_post_terms($this_id, 'topic_allowed_applicants');
 
@@ -174,7 +151,7 @@ get_header(); ?>
 					}
 				}
 
-				exit;
+				 exit;
 
 				?>
 			  <a href="<?php echo the_permalink(); ?>">
