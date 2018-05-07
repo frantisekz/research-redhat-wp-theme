@@ -79,9 +79,9 @@ get_header(); ?>
 				$my_query = null;
 				$my_query = new WP_Query($args);
 				remove_filter('term_description','wpautop');
-				
+
 				/* 	While pro vypocty topics
-				 *  	Amount of possible applicants :
+				 *  Amount of possible applicants :
 				 * 	1,2,50 == max. amount of possible applicants
 				 * 	without == infinity amount of possible applicants
 				 */
@@ -100,7 +100,7 @@ get_header(); ?>
 
 					// $count -> pocet shod
 					$count = count($sql_same);
-					
+
 					// $temp_terms -> pocet povolenych studentu
 					$temp_terms = wp_get_post_terms($this_id, 'topic_allowed_applicants');
 
@@ -123,9 +123,9 @@ get_header(); ?>
 
 						$sql_change = "UPDATE wp_posts SET active='1' WHERE post_name='{$post_name_change}' AND post_type='diplomas'";
 					}
-				
+
 				endwhile;
-				
+
 				/* 	While pro zobrazovani topics
 				 * 	$status -> display:none; / display:block;
 				 */
@@ -135,7 +135,7 @@ get_header(); ?>
 					$this_id = get_the_ID();
 
 					global $wpdb;
-					
+
 					// zajisti vytahnuti jednotlivych topics podle id a active z db
 					$sql = $wpdb->get_results("SELECT ID,active FROM wp_posts WHERE id={$this_id}", ARRAY_A);
 					$merged_sql = array_merge(...$sql);
@@ -145,7 +145,7 @@ get_header(); ?>
 					} else {
 						$status = "display:block;";
 					}
-				
+
 			  ?>
 			  <a href="<?php echo the_permalink(); ?>" style="<?=$status?>">
 				<div class="col-md-12 project-box">
