@@ -85,10 +85,10 @@ get_header(); ?>
 				while ($my_query->have_posts()) : $my_query->the_post();
 				$terms_uni = wp_get_post_terms(get_the_ID(), 'parrent_university');
 				$terms_category = wp_get_post_terms(get_the_ID(), 'these_category');
-				
+
 				// $this_id -> id aktualniho topicu
 				$this_id = get_the_ID();
-				$this_id = '1946';
+				// $this_id = '1946';
 
 				// $post_name -> hodnota podle ktere budeme filtrovat/hledat shody
 				$sql = $wpdb->get_results("SELECT post_name FROM wp_posts WHERE id={$this_id}", ARRAY_A);
@@ -103,6 +103,7 @@ get_header(); ?>
 				$count = count($sql_same);
 
 				// var_dump($count);
+
 
 				$temp_terms = wp_get_post_terms($this_id, 'topic_allowed_applicants');
 
@@ -121,7 +122,6 @@ get_header(); ?>
 				 var_dump($max_applicants);
 
 				if ($count < $max_applicants) {
-					if((is_user_logged_in()) && (function_exists('Ninja_Forms'))) {
 						$servername = "localhost";
 						$username = "root";
 						$password = "123456";
@@ -148,10 +148,9 @@ get_header(); ?>
 						}
 
 						$conn->close();
-					}
 				}
 
-				 exit;
+				// exit;
 
 				?>
 			  <a href="<?php echo the_permalink(); ?>">
