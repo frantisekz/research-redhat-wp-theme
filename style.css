@@ -282,8 +282,13 @@ li.current-menu-item a{
   color: white;
 }
 
-.project-inner {
+.project-inner-events {
   width: 55%;
+  margin: 1.5em;
+  float: left;
+}
+
+.project-inner {
   margin: 1.5em;
   float: left;
 }
@@ -297,7 +302,6 @@ li.current-menu-item a{
   width: 35%;
   background-size: 60px 60px;
 }
-
 
 .event-img {
   width: 35%;

@@ -71,7 +71,7 @@ get_header(); ?>
 					</div>
 		        </div>
 
-			  <div class="project-inner" >
+			  <div class="project-inner-events" >
 				  <div class="row">
 					  <div class="col-md-12">
 						  <p class="project-heading"><?php the_title(); ?></p>
