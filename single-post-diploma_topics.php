@@ -81,7 +81,7 @@ get_header(); ?>
 				remove_filter('term_description','wpautop');
 				
 				/* 	While pro vypocty topics
-				 *  Amount of possible applicants :
+				 *  	Amount of possible applicants :
 				 * 	1,2,50 == max. amount of possible applicants
 				 * 	without == infinity amount of possible applicants
 				 */
