@@ -10,176 +10,178 @@ Version: 1.1
 
 /* ALL SITE */
 html {
-  overflow-x: hidden;
+	overflow-x: hidden;
 }
 
 body {
-  background: #a30000;
-  font-size: 16px;
+	background: #a30000;
+	font-size: 16px;
 }
 
 html,
 body {
-    height: 100%;
+	height: 100%;
 }
 
 .more-link {
-  display: none;
+	display: none;
 }
 
 .taxonomy-description {
-  display: none;
+	display: none;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  color: #cc0000;
+	color: #cc0000;
 }
 
 .site-header {
-  overflow: unset;
+	overflow: unset;
 }
 
 .site-header .right-overlay img {
-  margin-left: -260px;
+	margin-left: -260px;
 }
 
 .utility-bar {
-  display: none;
+	display: none;
 }
 
 .site-branding {
-  padding: 40px 0;
+	padding: 40px 0;
 }
 
 .site-name {
-  width: 85%;
-  font-size: 2.5em;
+	width: 85%;
+	font-size: 2.5em;
 }
 
 .site-info {
-  display: flex;
-  align-items: center;
+	display: flex;
+	align-items: center;
 }
 
 .site-content {
-  padding-bottom: 200px;
+	padding-bottom: 200px;
 }
 
 .main-navigation {
-  background: #333333;
+	background: #333333;
 }
 
 .menu-primary-container > ul > li > a {
-  color: white;
-  padding-top: 1em;
-  padding-bottom: 1em;
+	color: white;
+	padding-top: 1em;
+	padding-bottom: 1em;
 }
 
 .menu-primary-container > ul > li {
-  font-size: 1em;
+	font-size: 1em;
 }
 
 li.current-menu-item a{
-  color: #333333 !important;
-  background: white !important;
+	color: #333333 !important;
+	background: white !important;
 }
 
 .menu-primary-container > ul > li > a:hover {
-  color: #333333 !important;
-  background: white !important;
+	color: #333333 !important;
+	background: white !important;
 }
 
 .menu-primary-container > ul > li > ul > li a {
-  color: white;
-  background: #333333;
+	color: white;
+	background: #333333;
 }
 
 .social-footer {
-  font-size: 2em;
+	font-size: 2em;
 }
 
 .social-footer i {
-  margin-right: 10px;
+	margin-right: 10px;
 }
 
 .social-footer a:hover {
-  color: #cc0000;
+	color: #cc0000;
 }
 
 .site-footer {
-  position: fixed;
-  bottom: 0px;
-  width: 100%;
-  padding-top: 1em;
-  padding-bottom: 1em;
+	position: fixed;
+	bottom: 0px;
+	width: 100%;
+	padding-top: 1em;
+	padding-bottom: 1em;
 }
 
 #footer_touch {
-  cursor: pointer;
+	cursor: pointer;
 }
 
 .hentry {
-  padding-bottom: 20px;
-  margin-bottom: 20px;
-  border-bottom: none;
+	padding-bottom: 20px;
+	margin-bottom: 20px;
+	border-bottom: none;
 }
 
 /* SECTION: Front Categories */
 
 #front-categories {
-  background-color: #d7d7d7;
-  min-height: 475px;
-  padding-top: 60px;
+	background-color: #ededed;
+	min-height: 475px;
+	padding-top: 60px;
 }
 
 #front-pre-footer {
-  background-color: #d7d7d7;
-  padding-top: 100px;
-  padding-bottom: 100px;
+	background-color: #ededed;
+	padding-top: 100px;
+	padding-bottom: 100px;
 }
 
 .front-container {
-  padding-left: 0px;
-  padding-right: 0px;
+	padding-left: 0px;
+	padding-right: 0px;
 }
 
 .front-site-content {
-  padding: 0px 0;
+	padding: 0px 0;
 }
 
 .white-site-content {
-  background: white;
+	background: white;
 }
 
 .front-item {
-  cursor: pointer;
-  overflow: hidden;
-  background-color: white;
-  margin-bottom: 25px;
+	cursor: pointer;
+	overflow: hidden;
+	background-color: white;
+	margin-bottom: 25px;
 }
 
 .front-thumb-img img {
-  width: 100%;
-  transition: all 0.25s ease;
-  margin: 0 auto;
+	width: 100%;
+	transition: all 0.25s ease;
+	margin: 0 auto;
 }
 
 .front-item p {
-  padding-right: 8px;
-  padding-left: 8px;
+	padding-right: 8px;
+	padding-left: 8px;
 }
 
 .front-thumb-img {
-  width: 100%;
-  overflow: hidden;
+	width: 100%;
+	overflow: hidden;
 }
 
 .front-meta {
-  height: 100%;
+	height: 100%;
+	font-size: 27px;
 }
 
 .front-item:hover > .front-meta {
-	background-color: #cc0000;
+	background-color: #b30000;
+	font-size: 27px;
 }
 
 .front-item:hover > .front-meta h2{
@@ -196,21 +198,21 @@ li.current-menu-item a{
 }
 
 .front-item:hover > .front-thumb-img img {
-  transform:scale(1.25);
+	transform:scale(1.25);
 }
 
 .front-item p {
-  font-size: 0.9em;
-  margin: 0;
+	font-size: 0.9em;
+	margin: 0;
 }
 
 .front-item {
-  margin-bottom: 25px;
+	margin-bottom: 25px;
 }
 
 .front-disabled {
-  background-color: rgba(0,0,0,0.1) !important;
-  pointer-events: none;
+	background-color: rgba(0,0,0,0.1) !important;
+	pointer-events: none;
 }
 
 @media only screen and (min-width: 769px) {
@@ -226,205 +228,212 @@ li.current-menu-item a{
 }
 
 .page-header {
-  border-bottom: 0px;
+	border-bottom: 0px;
+	font-size: 25px;
+	padding-top: 14px;
+	text-align: center;
+	position: relative;
+	top: 10%;
+	transform: translateY(-50%);
 }
 
 .site-name {
-  margin-bottom: 0px;
+	margin-bottom: 0px;
 }
 
 .sub-description {
-  margin-left: 250px;
-  color: black;
-  font-size: 2.7em;
-  font-weight: 800;
+	margin-left: 250px;
+	color: black;
+	font-size: 2.7em;
+	font-weight: 800;
 }
 
 /* SECTION: Front Intro */
 #front-intro {
-  background-color: white;
-  padding-top: 50px;
-  padding-bottom: 50px;
+	background-color: #004254;
+	padding-top: 50px;
+	padding-bottom: 50px;
+	color: whitesmoke;
 }
 
 #front-intro h3, h6 {
-  color: black;
+	color: white;
 }
 
 #front-pre-footer h3, h6 {
-  color: black;
+	color: black;
 }
 
 /* PROJECT LISTING */
 .master-reset-btn {
-  margin-bottom: 1em;
-  margin-right: 0em !important;
-  float: right;
+	margin-bottom: 1em;
+	margin-right: 0em !important;
+	float: right;
 }
 
 .project-tags {
-  border-radius: 25px;
-  color: black;
-  margin-right: 5px;
-  padding-left: 10px;
-  padding-right: 10px;
+	border-radius: 25px;
+	color: black;
+	margin-right: 5px;
+	padding-left: 10px;
+	padding-right: 10px;
 }
 
 .project-tags a {
-  color: black;
+	color: black;
 }
 
 .diploma-tag {
-  margin-right: 1em;
-  padding: 0.2em;
-  border: 1px solid grey;
-  background-color: #333333;
-  color: white;
+	margin-right: 1em;
+	padding: 0.2em;
+	border: 1px solid grey;
+	background-color: #333333;
+	color: white;
 }
 
 .project-inner-events {
-  width: 55%;
-  margin: 1.5em;
-  float: left;
+	width: 55%;
+	margin: 1.5em;
+	float: left;
 }
 
 .project-inner {
-  margin: 1.5em;
-  float: left;
+	margin: 1.5em;
+	float: left;
 }
 
 .pattern {
-  background-image: url("patterns-021.png");
-  background-repeat: repeat-y;
-  display: table-cell;
-  vertical-align: middle;
-  text-align: center;
-  width: 35%;
-  background-size: 60px 60px;
+	background-image: url("patterns-021.png");
+	background-repeat: repeat-y;
+	display: table-cell;
+	vertical-align: middle;
+	text-align: center;
+	width: 35%;
+	background-size: 60px 60px;
 }
 
 .event-img {
-  width: 35%;
-  float: left;
-  margin: 29px;
-  display: flex;
-  vertical-align: middle;
-  text-align: center;
-  background-size: cover;
-  background-repeat: no-repeat;
+	width: 35%;
+	float: left;
+	margin: 29px;
+	display: flex;
+	vertical-align: middle;
+	text-align: center;
+	background-size: cover;
+	background-repeat: no-repeat;
 }
 
 .past-project {
-  color: grey;
+	color: grey;
 }
 
 .past-project a {
-  color: grey;
+	color: grey;
 }
 
 .project-box {
-  cursor: pointer;
-  position: relative;
-  height: auto;
-  padding: 1em;
-  background: white;
-  background-clip: content-box;
-  color: black;
-  transition: background-color 0.5s ease;
+	cursor: pointer;
+	position: relative;
+	height: auto;
+	padding: 1em;
+	background: white;
+	background-clip: content-box;
+	color: black;
+	transition: background-color 0.5s ease;
 }
 
 .project-box a {
-  color: #333333;
+	color: #333333;
 }
 
 .project-box:hover {
-  background-color: #d8d8d8;
+	background-color: #d8d8d8;
 }
 
 
 .project-heading {
-  font-weight: 700;
-  font-size: 1.5em;
-  margin-bottom: 0.5em;
+	font-weight: 700;
+	font-size: 1.5em;
+	margin-bottom: 0.5em;
 }
 
 .tag-listing {
-  margin-bottom: 1em;
-  margin-top: 1em;
+	margin-bottom: 1em;
+	margin-top: 1em;
 }
 
 @media only screen and (min-width: 992px) {
-  #rnd-listing-container {
-    border-left: 1px solid grey;
-  }
+	#rnd-listing-container {
+		border-left: 1px solid grey;
+	}
 }
 
 /* SINGLE PROJECT */
 .city {
-  font-size: 1.0em;
+	font-size: 1.0em;
 }
 
 .university {
-  font-size: 1.0em;
+	font-size: 1.0em;
 }
 
 .city-notice {
-  border-bottom: 2px solid #f0f0f0;
-  color: black;
+	border-bottom: 2px solid #f0f0f0;
+	color: black;
 }
 
 .textarea-wrap textarea {
-  height: 100px !important;
+	height: 100px !important;
 }
 
 .listing-header {
-  padding-bottom: 25px;
+	padding-bottom: 25px;
 }
 
 .single-project-meta {
-  padding-bottom: 2em;
-  margin-top: 20px;
+	padding-bottom: 2em;
+	margin-top: 20px;
 }
 
 #project_coordinator {
-  padding-bottom: 1em;
-  border-top: 2px solid #f0f0f0;
-  margin-top: 1.5em;
+	padding-bottom: 1em;
+	border-top: 2px solid #f0f0f0;
+	margin-top: 1.5em;
 }
 
 #contact-after-project {
-  padding-bottom: 2em;
+	padding-bottom: 2em;
 }
 
 .btn-white {
-  color: black;
-  background: white;
-  margin-right: 1em;
+	color: black;
+	background: white;
+	margin-right: 1em;
 }
 
 .post-navigation {
-  display: none;
+	display: none;
 }
 
 .modal-backdrop {
-  z-index: -1;
+	z-index: -1;
 }
 
 /* HARD-CODED ID's to form below project */
 #ninja_forms_field_11_div_wrap {
-  width: 48%;
-  float: left;
+	width: 48%;
+	float: left;
 }
 
 #ninja_forms_field_12_div_wrap {
-  width: 48%;
-  float: right;
+	width: 48%;
+	float: right;
 }
 
 .label-left {
-  text-align: left !important;
+	text-align: left !important;
 }
 
 .nf-field-label {
-  text-align: left !important;
+	text-align: left !important;
 }
