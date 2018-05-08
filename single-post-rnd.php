@@ -16,7 +16,7 @@ get_header(); ?>
 						<span class="caret"></span>
 					</button>
 					<ul class="dropdown-menu" aria-labelledby="city_drop_down">
-							<?php 
+							<?php
 							$generic_terms_place = get_terms(['taxonomy' => 'project_place', 'hide_empty' => false]);
 							foreach ($generic_terms_place as $generic_term_place) {
 								echo '<li onclick="trigger_box(' . $generic_term_place->term_id . ', 1)" class="city_drop_down" id="trigger-' . $generic_term_place->term_id . '"><a href="#">' . $generic_term_place->name . '</a></li>';
@@ -30,7 +30,7 @@ get_header(); ?>
 						<span class="caret"></span>
 					</button>
 					<ul class="dropdown-menu" aria-labelledby="spec_drop_down">
-							<?php 
+							<?php
 							$generic_terms_tags = get_terms(['taxonomy' => 'project_category', 'hide_empty' => false]);
 							foreach ($generic_terms_tags as $generic_term_tag) {
 								echo '<li onclick="trigger_box(' . $generic_term_tag->term_id . ', 0)" class="spec_drop_down" id="trigger-' . $generic_term_tag->term_id . '"><a href="#">' . $generic_term_tag->name . '</a></li>';
@@ -44,7 +44,7 @@ get_header(); ?>
 
 			<div class="col-md-4 text-right">
 					<form class="search" action="<?php echo home_url( '/' ); ?>">
-							<input type="search" value="<?php echo esc_html( get_search_query() ); ?>" size="25" name="s" placeholder="Title/Tag/Description....">
+							<input type="search" value="<?php echo esc_html( get_search_query() ); ?>" size="20" name="s" placeholder="Title/Tag/Description....">
 							<button type="submit" class="btn btn-white btn-default">Search</button>
 							<input type="hidden" name="post_type" value="projects">
 					</form>
@@ -76,7 +76,7 @@ get_header(); ?>
 						</div>
 						<?php the_excerpt(); ?>
 						<div style="font-size: 1.1em; display: inline-block; width: 100%; visibility: hidden;">
-							<?php 
+							<?php
 							foreach ($terms_place as $term) {
 								echo '<i class="fa fa-home" aria-hidden="true"></i><span id="' . $term->term_id . '"';
 								echo ' style="white-space: nowrap; padding-right: 15px;">' . $term->name . '</span>';

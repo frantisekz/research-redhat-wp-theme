@@ -51,7 +51,7 @@ get_header(); ?>
 				}
 
 				if ($thesis_with_this < $max_applicants) {
-					if((is_user_logged_in()) && (function_exists('Ninja_Forms'))) { 
+					if((is_user_logged_in()) && (function_exists('Ninja_Forms'))) {
 						echo '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#apply_for_topic">
 						Apply for this topic
 					</button>';
@@ -62,7 +62,7 @@ get_header(); ?>
 						$actual_link = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 						echo '<div class="text-center">
 								<strong>You must be logged in to perform this action!</strong><br>
-								<a href="' . wp_login_url($actual_link) . '"><button class="btn btn-primary">Login to apply for this topic</button></a><br/>	
+								<a href="' . wp_login_url($actual_link) . '"><button class="btn btn-primary">Login to apply for this topic</button></a><br/>
 							</div>';
 					}
 				}
@@ -116,7 +116,7 @@ get_header(); ?>
 			<section id="contact-after-project">
 				<?php
 				while ( have_posts() ) : the_post(); // And start the loop again, new and shiny one
-				if((is_user_logged_in()) && (function_exists('Ninja_Forms'))) { 
+				if((is_user_logged_in()) && (function_exists('Ninja_Forms'))) {
 					?>
 					<div class="modal fade" tabindex="-1" role="dialog" id="apply_for_topic">
 					<div class="modal-dialog" role="document">
@@ -161,11 +161,11 @@ get_header(); ?>
 
 	<div class="col-md-3" style="margin-top: 20px;">
 
-	<?php 
+	<?php
 		$terms_uni = wp_get_post_terms(get_the_ID(), 'parrent_university');
 		echo '<span class="university">';
 		foreach ($terms_uni as $term) {
-			echo '<i class="fa fa-fw fa-university" aria-hidden="true"></i> ' . $term->name . '<br/>';	
+			echo '<i class="fa fa-fw fa-university" aria-hidden="true"></i> ' . $term->name . '<br/>';
 		}
 		echo '</span>'; ?>
 	</div>
