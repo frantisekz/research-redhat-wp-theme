@@ -60,6 +60,33 @@ get_header(); ?>
 
 			<div class="row">
 			<?php
+// $calculated_applicants = array('topic_id' => 'number_of_applicants');
+$args_theses=array(
+    # Set parameters, so the query will loop through all Theses
+					'post_type' => 'theses',
+					'post_status' => 'publish',
+					'posts_per_page' => -1,
+					'ignore_sticky_posts' => 1);
+				$theses_query = new WP_Query($args_theses);
+
+				if( $theses_query->have_posts() ) {
+                    # Init the loop, one iteration per thesis
+                    while ($theses_query->have_posts()) : $theses_query->the_post();
+                        # Fetch all metadata for thesis (we need id of linked Diploma Topic)
+                        $terms_topics = wp_get_object_terms(get_the_ID(), 'diplomas');
+                        # Loop through all linked Topics with single Thesis (so, we should have one iteration only here)
+						foreach ($terms_topics as $terms_topic) {
+                            # Prevent accessing out of array bounds
+                            if (isset($calculated_applicants[$terms_topic->term_id])) {
+                                $calculated_applicants[$terms_topic->term_id] = $calculated_applicants[$terms_topic->term_id] + 1;
+                            }
+                            else {
+                                $calculated_applicants[$terms_topic->term_id] = 1;
+                            }
+						}
+					endwhile;
+				}
+
 			  $args=array(
             'post_type' => 'diplomas',
 			'post_status' => 'publish',
@@ -79,13 +106,29 @@ get_header(); ?>
 			  $my_query = null;
         	  $my_query = new WP_Query($args); 
 			  remove_filter('term_description','wpautop');
-
+print_r($calculated_applicants);
               while ($my_query->have_posts()) : $my_query->the_post();
+				$temp_terms = wp_get_post_terms(get_the_ID(), 'topic_allowed_applicants');
+				foreach ($temp_terms as $temp_term) {
+					$max_applicants = $temp_term->name;
+					break;
+				}
+				if (!isset($max_applicants)) {
+					// If topic author didn't set topic_allowed_applicants
+					$max_applicants = 999;		
+				}
+if ( ( isset($calculated_applicants[get_the_ID()]) ) && ( $calculated_applicants[get_the_ID()] >= $max_applicants ) ) {
+	$hide = 1;
+}
+else {
+	$hide = 0;
+}
+	$max_applicants = NULL; // We don't need this anymore, reset for next iteration
               $terms_uni = wp_get_post_terms(get_the_ID(), 'parrent_university');
 			  $terms_category = wp_get_post_terms(get_the_ID(), 'these_category');
 			  ?>
 			  <a href="<?php echo the_permalink(); ?>">
-				<div class="col-md-12 project-box">
+				<div class="col-md-12 project-box" <?php if ($hide == 1) {echo 'style="display: none;"';}?>>
 				<div class="project-inner">
 					<div class="row">
 							<div class="col-md-12">
