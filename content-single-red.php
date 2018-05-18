@@ -1,7 +1,7 @@
 <?php
 /**
  * @package Red Hat Blog Theme
- */ AAAAA
+ */ aaaa
 ?>
 
 <style>
