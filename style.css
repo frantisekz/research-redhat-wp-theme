@@ -18,7 +18,7 @@ body {
   font-size: 16px;
 }
 
-html, 
+html,
 body {
     height: 100%;
 }
@@ -378,6 +378,9 @@ li.current-menu-item a{
 .btn-white {
   color: black;
   background: white;
+}
+
+#university_drop_down_common {
   margin-right: 1em;
 }
 

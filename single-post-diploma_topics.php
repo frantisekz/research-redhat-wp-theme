@@ -16,7 +16,7 @@ get_header(); ?>
 
 	<div class="col-md-6">
 		<div class="dropdown" style="float: left;">
-		<button class="btn btn-white btn-default dropdown-toggle" type="button" id="university_drop_down" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+		<button class="btn btn-white btn-default dropdown-toggle" type="button" id="university_drop_down_common" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
 			All Universities
 			<span class="caret"></span>
 		</button>

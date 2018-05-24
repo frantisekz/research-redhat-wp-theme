@@ -8,7 +8,7 @@
 get_header(); ?>
 
 	<div id="primary" class="content-area col-sm-12">
-		
+
 		<main id="main" class="site-main" role="main">
 			<h1 style="color: white;"><?php the_title(); ?></h1>
 	<section id="rnd-listing">
@@ -16,12 +16,12 @@ get_header(); ?>
 	<div class="row">
 		<div class="col-md-6">
 			<div class="dropdown" style="float: left;">
-				<button class="btn btn-white btn-default dropdown-toggle" type="button" id="university_drop_down" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+				<button class="btn btn-white btn-default dropdown-toggle" type="button" id="university_drop_down_common" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
 					All Locations
 					<span class="caret"></span>
 				</button>
 				<ul class="dropdown-menu" aria-labelledby="university_drop_down">
-					<?php 
+					<?php
 					$generic_terms_place = get_terms(['taxonomy' => 'filled_internships_locations', 'hide_empty' => false]);
 					foreach ($generic_terms_place as $generic_term_place) {
 						echo '<li onclick="trigger_box(' . $generic_term_place->term_id . ', 1)" class="university_drop_down" id="trigger-' . $generic_term_place->term_id . '"><a href="#">' . $generic_term_place->name . '</a></li>';
@@ -35,7 +35,7 @@ get_header(); ?>
 				<span class="caret"></span>
 			</button>
 			<ul class="dropdown-menu" aria-labelledby="spec_drop_down">
-					<?php 
+					<?php
 					$generic_terms_tags = get_terms(['taxonomy' => 'filled_internships_tags', 'hide_empty' => false]);
 					foreach ($generic_terms_tags as $generic_term_tag) {
 						echo '<li onclick="trigger_box(' . $generic_term_tag->term_id . ', 0)" class="spec_drop_down" id="trigger-' . $generic_term_tag->term_id . '"><a href="#">' . $generic_term_tag->name . '</a></li>';
@@ -64,7 +64,7 @@ get_header(); ?>
             'posts_per_page' => -1,
             'ignore_sticky_posts' => 1);
 			  $my_query = null;
-        	  $my_query = new WP_Query($args); 
+        	  $my_query = new WP_Query($args);
 			  remove_filter('term_description','wpautop');
               while ($my_query->have_posts()) : $my_query->the_post();
 			  $terms_category = wp_get_post_terms(get_the_ID(), 'filled_internships_tags');
