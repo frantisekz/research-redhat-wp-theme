@@ -18,7 +18,7 @@ body {
   font-size: 16px;
 }
 
-html, 
+html,
 body {
     height: 100%;
 }
@@ -283,7 +283,14 @@ li.current-menu-item a{
 }
 
 .project-inner {
-  padding: 0.5em;
+  margin: 1.5em;
+  float: left;
+}
+
+.project-inner-events {
+  margin: 1.5em;
+  width: 55%;
+  float: left;
 }
 
 .past-project {
@@ -378,6 +385,9 @@ li.current-menu-item a{
 .btn-white {
   color: black;
   background: white;
+}
+
+#university_drop_down_common {
   margin-right: 1em;
 }
 
