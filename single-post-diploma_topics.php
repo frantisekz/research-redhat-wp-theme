@@ -8,7 +8,7 @@
 get_header(); ?>
 
 	<div id="primary" class="content-area col-sm-12">
-		
+
 		<main id="main" class="site-main" role="main">
 			<h1 style="color: white;"><?php the_title(); ?></h1>
 	<section id="rnd-listing">
@@ -21,7 +21,7 @@ get_header(); ?>
 			<span class="caret"></span>
 		</button>
 		<ul class="dropdown-menu" aria-labelledby="university_drop_down">
-				<?php 
+				<?php
 				$generic_terms_place = get_terms(['taxonomy' => 'parrent_university', 'hide_empty' => false]);
 				foreach ($generic_terms_place as $generic_term_place) {
 					echo '<li onclick="trigger_box(' . $generic_term_place->term_id . ', 1)" class="university_drop_down" id="trigger-' . $generic_term_place->term_id . '"><a href="#">' . $generic_term_place->name . '</a></li>';
@@ -35,7 +35,7 @@ get_header(); ?>
 			<span class="caret"></span>
 		</button>
 		<ul class="dropdown-menu" aria-labelledby="spec_drop_down">
-				<?php 
+				<?php
 				$generic_terms_tags = get_terms(['taxonomy' => 'these_category', 'hide_empty' => false]);
 				foreach ($generic_terms_tags as $generic_term_tag) {
 					echo '<li onclick="trigger_box(' . $generic_term_tag->term_id . ', 0)" class="spec_drop_down" id="trigger-' . $generic_term_tag->term_id . '"><a href="#">' . $generic_term_tag->name . '</a></li>';
@@ -50,7 +50,7 @@ get_header(); ?>
 
 	<div class="col-md-4 text-right">
 		<form class="search" action="<?php echo home_url( '/' ); ?>">
-				<input type="search" value="<?php echo esc_html( get_search_query() ); ?>" size="25" name="s" placeholder="Title/Tag/Description....">
+				<input type="search" value="<?php echo esc_html( get_search_query() ); ?>" size="20" name="s" placeholder="Title/Tag/Description....">
 				<button type="submit" class="btn btn-white btn-default">Search</button>
 				<input type="hidden" name="post_type" value="diplomas">
 		</form>
@@ -77,7 +77,7 @@ get_header(); ?>
 					'operator' => 'NOT IN'
 					)));
 			  $my_query = null;
-        	  $my_query = new WP_Query($args); 
+        	  $my_query = new WP_Query($args);
 			  remove_filter('term_description','wpautop');
 
               while ($my_query->have_posts()) : $my_query->the_post();
