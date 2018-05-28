@@ -18,7 +18,7 @@ body {
   font-size: 16px;
 }
 
-html, 
+html,
 body {
     height: 100%;
 }
@@ -282,8 +282,15 @@ li.current-menu-item a{
   color: white;
 }
 
+.project-inner-events {
+	width: 55%;
+	margin: 1.5em;
+	float: left;
+}
+
 .project-inner {
-  padding: 0.5em;
+	margin: 1.5em;
+	float: left;
 }
 
 .past-project {
