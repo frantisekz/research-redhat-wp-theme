@@ -299,17 +299,33 @@ add_action( 'show_user_profile', 'extra_user_profile_fields' );
 add_action( 'edit_user_profile', 'extra_user_profile_fields' );
 
 function extra_user_profile_fields( $user ) { ?>
-		<h3><?php _e("Extra profile information", "blank"); ?></h3>
+	<h3><?php _e("Extra profile information", "blank"); ?></h3>
 
-		<table class="form-table">
+	<table class="form-table">
 		<tr>
-				<td>
-						<input type="text" name="parrent_rh_office" id="parrent_rh_office" value="<?php echo esc_attr( get_the_author_meta( 'parrent_rh_office', $user->ID ) ); ?>" class="regular-text" /><br />
-						<span class="description"><?php _e("Please enter your Red Hat Office City Name (eg. Brno, Boston, etc..)."); ?></span>
+			<td>
+				<input type="text" name="parrent_rh_office" id="parrent_rh_office" value="<?php echo esc_attr( get_the_author_meta( 'parrent_rh_office', $user->ID ) ); ?>" class="regular-text" /><br />
+					<span class="description"><?php _e("Please enter your Red Hat Office City Name (eg. Brno, Boston, etc..)."); ?></span>
 				</td>
 				<td>
-						<input type="text" name="university" id="university" value="<?php echo esc_attr( get_the_author_meta( 'university', $user->ID ) ); ?>" class="regular-text" /><br />
-						<span class="description"><?php _e("Your University"); ?></span>
+<select name="university">
+<?php 	
+	$selected = 0;	
+	$generic_terms_place = get_terms(['taxonomy' => 'parrent_university', 'hide_empty' => false]);
+	foreach ($generic_terms_place as $generic_term_place) {
+		if ($generic_term_place->name != esc_attr(get_the_author_meta('university', $user->ID))) {
+			echo '<option value="'.$generic_term_place->name.'">' . $generic_term_place->name . '</option>';
+		} else {
+			$selected = 1;
+			echo '<option selected="selected" value="'.$generic_term_place->name.'">' . $generic_term_place->name . '</option>';
+		}
+                   } 
+	if ($selected == 0) {
+		echo '<option selected="selected" value="Default">Default</option>';
+	}
+?>
+</select><br/>
+					<span class="description"><?php _e("Your University"); ?></span>
 				</td>
 		</tr>
 		<tr>
@@ -317,8 +333,12 @@ function extra_user_profile_fields( $user ) { ?>
 				<input type="text" name="rh_team" id="rh_team" value="<?php echo esc_attr( get_the_author_meta( 'rh_team', $user->ID ) ); ?>" class="regular-text" /><br />
 				<span class="description"><?php _e("Your Team in Red Hat"); ?></span>
 			</td>
+			<td>
+				<input type="text" name="university" id="university" value="<?php echo esc_attr( get_the_author_meta( 'university', $user->ID ) ); ?>" class="regular-text" /><br />
+				<span class="description"><?php _e("Your university"); ?></span>
+			</td>
 		</tr>
-		</table>
+	</table>
 <?php }
 
 add_action( 'personal_options_update', 'save_extra_user_profile_fields' );
