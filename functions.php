@@ -13,11 +13,28 @@
  * Fill these manually!!!!
  * Ninja Form IDs
 */
+global $wpdb;
+$create_table_set = "
+   CREATE TABLE `{$wpdb->prefix}research_config` (
+       `id` bigint(20) unsigned NOT NULL,
+       `diploma_form_id` int(20) NOT NULL default '0',
+       `project_form_id` int(20) NOT NULL default '0',
+       `after_diploma_form_id` int(20) NOT NULL default '0',
+       `footer_contact_id` int(20) NOT NULL default '0',
+       PRIMARY KEY (id)
+   ) ENGINE=MyISAM  DEFAULT CHARSET=utf8mb4;
+";
+require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+dbDelta( $create_table_set );
+
 $DIPLOMA_FORM_ID = 13;
 $PROJECT_FORM_ID = 7;
 $AFTER_DIPLOMA_FORM_ID = 12;
 $FOOTER_CONTACT_ID = 1;
 $RH_LISTINGS = array('diploma_theses', 'diploma_archive', 'diploma_universities', 'diploma_topics', 'rnd', 'research_news', 'internships_open-positions', 'partner-universities', 'academic-research-groups', 'academic-publications', 'research_events', 'high-school-internships', 'internships_filled-positions');
+
+$sql_set = "UPDATE wp_research_config SET diploma_form_id='{$DIPLOMA_FORM_ID}', project_form_id='{$PROJECT_FORM_ID}', after_diploma_form_id='{$AFTER_DIPLOMA_FORM_ID}' , footer_contact_id='{$FOOTER_CONTACT_ID} 'WHERE id='1'";
+$wpdb->query($sql_set);
 
 // Register Custom Navigation Walker
 require_once('wp-bootstrap-navwalker.php');
