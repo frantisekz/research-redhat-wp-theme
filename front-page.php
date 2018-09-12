@@ -23,7 +23,7 @@ get_header('front'); ?>
 						'orderby'=>'ID',
 						'order'=>'ASC',
 			            'tag__in' => $tag,
-			            'posts_per_page'=>4, // Number of related posts to display.
+			            'posts_per_page'=>5, // Number of related posts to display.
 			            'ignore_sticky_posts'=>1);
 
 			        $my_query = new wp_query( $args );
