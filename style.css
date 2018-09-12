@@ -420,3 +420,9 @@ li.current-menu-item a{
         width: 1365px; /** width in pixels or percent **/
     }
 }
+
+@media (min-width: 992px) {
+	.col-md-3 {
+    	width: 20%;
+	}
+}
