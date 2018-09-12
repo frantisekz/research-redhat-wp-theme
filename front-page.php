@@ -15,7 +15,7 @@ get_header('front'); ?>
 	<div id="primary" class="content-area col-sm-12">
 		
 		<section id="front-categories">
-			<div class="container">
+			<div class="container container-resize">
 			<div class="row front-items-container">
 			    <?php
 					$tag = get_term_by('name', 'title_post', 'post_tag');
