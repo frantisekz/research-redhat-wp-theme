@@ -414,3 +414,9 @@ li.current-menu-item a{
 .nf-field-label {
   text-align: left !important;
 }
+
+@media (min-width: 1400px) {
+    .container-resize {
+        width: 1365px; /** width in pixels or percent **/
+    }
+}
