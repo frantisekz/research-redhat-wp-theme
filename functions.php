@@ -138,105 +138,6 @@ function rh_mail_approval_result($topic_id, $thesis_id, $student_id, $status) {
 	return 0;
 }
 
-function update_filtration() {
-
-	echo " <h1> Hi World </h1>";
-
-	$args=array(
-		'post_type' => 'diplomas',
-		'post_status' => 'publish',
-		'orderby'     => 'modified',
-		'posts_per_page' => -1,
-		'ignore_sticky_posts' => 1,
-		'these_not_full'=> 'yes',
-		'tax_query' => array(
-			array(
-				'taxonomy' => 'topic_allowed_applicants',
-				'field' => 'slug',
-				'terms' => array(
-					'0'
-				),
-				'operator' => 'NOT IN'
-			)));
-	$my_query = null;
-	$my_query = new WP_Query($args);
-	remove_filter('term_description','wpautop');
-
-	/* 	Create special table in db and save active plus other important values for this calculation in it
-	 *  id, active, post_type, post_name
-	 */
-
-	 global $wpdb;
-
-	 // nepekne krajni reseni pro update tabulky
-	 $query_drop = "DROP TABLE wp_filtration;";
-	 $wpdb->query($query_drop);
-
-	 $create_table_query = "
-						CREATE TABLE IF NOT EXISTS `{$wpdb->prefix}filtration` (
-							`id` bigint(20) unsigned NOT NULL,
-							`active` ENUM('0','1') NOT NULL default '0',
-							`post_type` VARCHAR(20) NOT NULL default 'post',
-							`post_name` VARCHAR(200) NOT NULL,
-							PRIMARY KEY (id)
-						) ENGINE=MyISAM  DEFAULT CHARSET=utf8mb4;
-	 ";
-
-	 require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
-	 dbDelta( $create_table_query );
-
-	 $query = "INSERT INTO wp_filtration (id, active, post_type, post_name) SELECT id, active, post_type, post_name FROM `wp_posts`";
-	 $wpdb->query($query);
-
-	/* 	While pro vypocty topics
-	 *  Amount of possible applicants :
-	 * 	1,2,50 == max. amount of possible applicants
-	 * 	without == infinity amount of possible applicants
-	 */
-	while ($my_query->have_posts()) : $my_query->the_post();
-
-		// $this_id -> id aktualniho topicu
-		$this_id = (string)(get_the_ID());
-
-		// $post_name -> hodnota podle ktere budeme filtrovat/hledat shody
-		$sql = $wpdb->get_results("SELECT post_name FROM wp_filtration WHERE id={$this_id}", ARRAY_A);
-		$merged_sql = array_merge(...$sql);
-		$post_name = $merged_sql['post_name'];
-
-		// $sql_same -> dotaz na db aby nasla shodu
-		$sql_same = $wpdb->get_results("SELECT * FROM wp_filtration WHERE post_name='{$post_name}' AND post_type='theses'");
-
-		// $count -> pocet shod
-		$count = count($sql_same);
-
-		// $temp_terms -> pocet povolenych studentu
-		$temp_terms = wp_get_post_terms($this_id, 'topic_allowed_applicants');
-
-		if (!empty($temp_terms)) {
-			foreach ($temp_terms as $temp_term) {
-				$max_applicants = $temp_term->name;
-				break;
-			}
-		} else {
-			$max_applicants = 999;
-		}
-
-		if ($count < $max_applicants) {
-			global $wpdb;
-
-			// zajisti prepsani prislusne diploma na 0/1 (podle stejneho post_name -> $post_name_change)
-			$sql_change = $wpdb->get_results("SELECT post_name, post_type, active FROM wp_filtration WHERE id={$this_id}", ARRAY_A);
-			$merged_sql_change = array_merge(...$sql_change);
-			$post_name_change = $merged_sql['post_name'];
-
-			$sql_change = "UPDATE wp_filtration SET active='1' WHERE post_name='{$post_name_change}' AND post_type='diplomas'";
-		}
-
-	endwhile;
-
-
-}
-
 /**
  * Spawns a copy of Diploma Topic as Diploma These
  * @param  [int] $post_id The Topic you want to clone
@@ -272,7 +173,6 @@ function spawn_these($post_id, $student_id) {
 		}
 		update_post_meta($new_post_id, 'parrent_university_student', get_the_author_meta('university', $student_id));
 		$cpt_onomy->wp_set_object_terms($new_post_id, $topic_post->post_name, 'diplomas');
-		update_filtration();
 		return $new_post_id;
 	}
 
@@ -327,8 +227,8 @@ function extra_user_profile_fields( $user ) { ?>
 				</td>
 				<td>
 <select name="university">
-<?php 	
-	$selected = 0;	
+<?php
+	$selected = 0;
 	$generic_terms_place = get_terms(['taxonomy' => 'parrent_university', 'hide_empty' => false]);
 	foreach ($generic_terms_place as $generic_term_place) {
 		if ($generic_term_place->name != esc_attr(get_the_author_meta('university', $user->ID))) {
@@ -337,7 +237,7 @@ function extra_user_profile_fields( $user ) { ?>
 			$selected = 1;
 			echo '<option selected="selected" value="'.$generic_term_place->name.'">' . $generic_term_place->name . '</option>';
 		}
-                   } 
+                   }
 	if ($selected == 0) {
 		echo '<option selected="selected" value="Default">Default</option>';
 	}
