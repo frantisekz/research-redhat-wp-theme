@@ -126,7 +126,7 @@ function rh_mail_approval_result($topic_id, $thesis_id, $student_id, $status) {
  * @return [int] The duplicated Post ID
   * TODO: Error reporting?
 */
-function spawn_these($post_id, $student_id) {
+function spawn_these($post_id, $teacher_id, $student_id) {
 		global $cpt_onomy;
 		$title   = get_the_title($post_id);
 		$topic_post = get_post($post_id);
