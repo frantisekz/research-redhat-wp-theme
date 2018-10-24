@@ -28,7 +28,7 @@ get_header(); ?>
 
 	<div class="col-md-12 text-right">
 		<form class="search" action="<?php echo home_url( '/' ); ?>">
-				<input type="search" value="<?php echo esc_html( get_search_query() ); ?>" size="25" name="s" placeholder="Title/Tag/Description....">
+				<input type="search" value="<?php echo esc_html( get_search_query() ); ?>" size="20" name="s" placeholder="Title/Tag/Description....">
 				<button type="submit" class="btn btn-white btn-default">Search</button>
 				<input type="hidden" name="post_type" value="event">
 		</form>
@@ -55,15 +55,30 @@ get_header(); ?>
 				  $past_event = 1;
 			  }
               ?>
-              <div onclick="window.location='<?php echo the_permalink(); ?>';" class="col-md-12 project-box" <?php if ($past_event == 1) {echo 'style="display: none;"';} ?>>
-			  <div class="project-inner-events">
-				  <div class="row">
-						<div class="col-md-12">
-							<p class="project-heading"><?php the_title(); ?></p>
-						</div>
+              <div onclick="window.location='<?php echo the_permalink(); ?>';" class="col-md-12 project-box" <?php if ($past_event == 1) {echo 'style="display: none;"';} else {echo 'style="display: flex;"';}?>>
+
+				  <?php
+				  	$thumb_id = get_post_thumbnail_id();
+					$thumb_url_array = wp_get_attachment_image_src($thumb_id, 'thumbnail-size', true);
+					$thumb_url = $thumb_url_array[0];
+				  ?>
+
+				<div class="event-img" style="background-image: url('<?php echo $thumb_url; ?>')">
+					<div class="pattern">
+					  <div class="picture">
+
+					  </div>
 					</div>
-			<?php the_content(); ?>
-			</div>
+		        </div>
+
+			  <div class="project-inner-events" >
+				  <div class="row">
+					  <div class="col-md-12">
+						  <p class="project-heading"><?php the_title(); ?></p>
+					  </div>
+				  </div>
+				<?php the_content(); ?>
+			  </div>
 			</div>
             <?php endwhile;
             add_filter('term_description','wpautop');
