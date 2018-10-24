@@ -21,7 +21,6 @@ if (!is_numeric($_GET['student_id'])) {
 
 $post_name_get = get_post( $_GET['topic_id'], ARRAY_A );
 $post_name = $post_name_get['post_name'];
-
 ?>
 	<div id="primary" class="content-area col-sm-12">
 		<main id="main" class="site-main" role="main">
@@ -32,7 +31,7 @@ $post_name = $post_name_get['post_name'];
 						if ($new_thesis_id != -1) {
 							rh_mail_approval_result($_GET['topic_id'], $new_thesis_id, $_GET['student_id'], 'approved');
 							echo '<strong>Thesis approved succesfully! You can close this page now.</strong>';
-
+							
 							global $wpdb;
 							$sql_change = $wpdb->query("UPDATE wp_filtration SET approved_applicants=approved_applicants + 1 WHERE post_name='{$post_name}' AND post_type='diplomas'");
 						}
@@ -64,8 +63,8 @@ $post_name = $post_name_get['post_name'];
 					<?php $actual_link = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]"; ?>
 					<div class="text-center">
 						<strong>You must be logged in to perform this action!</strong><br>
-						<a href="<?php echo wp_login_url( $actual_link ); ?>"><button class="btn btn-primary">Login</button></a><br/>
-					</div>
+						<a href="<?php echo wp_login_url( $actual_link ); ?>"><button class="btn btn-primary">Login</button></a><br/>	
+					</div>			
 			<?php } ?>
 	</main><!-- #main -->
 	</div><!-- #primary -->

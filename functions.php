@@ -13,28 +13,10 @@
  * Fill these manually!!!!
  * Ninja Form IDs
 */
-global $wpdb;
-$create_table_set = "
-   CREATE TABLE IF NOT EXISTS `{$wpdb->prefix}research_config` (
-       `id` bigint(20) unsigned NOT NULL,
-       `diploma_form_id` int(20) NOT NULL default '0',
-       `project_form_id` int(20) NOT NULL default '0',
-       `after_diploma_form_id` int(20) NOT NULL default '0',
-       `footer_contact_id` int(20) NOT NULL default '0',
-       PRIMARY KEY (id)
-   ) ENGINE=MyISAM  DEFAULT CHARSET=utf8mb4;
-";
-require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
-dbDelta( $create_table_set );
-
-$post_id = $wpdb->get_results("SELECT diploma_form_id, project_form_id, after_diploma_form_id, footer_contact_id FROM wp_research_config");
-$array = json_decode(json_encode($post_id), True);
-
-$DIPLOMA_FORM_ID = (string)($array[0]['diploma_form_id']);
-$PROJECT_FORM_ID = (string)($array[0]['project_form_id']);
-$AFTER_DIPLOMA_FORM_ID = (string)($array[0]['after_diploma_form_id']);
-$FOOTER_CONTACT_ID = (string)($array[0]['footer_contact_id']);
-
+$DIPLOMA_FORM_ID = 13;
+$PROJECT_FORM_ID = 7;
+$AFTER_DIPLOMA_FORM_ID = 12;
+$FOOTER_CONTACT_ID = 1;
 $RH_LISTINGS = array('diploma_theses', 'diploma_archive', 'diploma_universities', 'diploma_topics', 'rnd', 'research_news', 'internships_open-positions', 'partner-universities', 'academic-research-groups', 'academic-publications', 'research_events', 'high-school-internships', 'internships_filled-positions');
 
 // Register Custom Navigation Walker
@@ -96,7 +78,7 @@ function is_able_to_aprove($leader_id, $topic_id, $student_id) {
 		'post_type' 	=>  'theses'
 		);
 
-	$my_query = new WP_Query($args);
+	$my_query = new WP_Query($args); 
 	while ($my_query->have_posts()) : $my_query->the_post();
 		if (get_the_title() == get_the_title($topic_id)) {
 			echo 'It looks like you have already approved this Thesis...<br/>';
@@ -196,8 +178,8 @@ add_filter( 'excerpt_length', 'wpdocs_custom_excerpt_length', 999 );
 function diplomas_search() {
     ob_start();
     get_template_part('diplomas_search_tpl');
-    return ob_get_clean();
-}
+    return ob_get_clean();   
+} 
 add_shortcode('diplomas_search', 'diplomas_search');
 
 // Deprecated, to be removed!
@@ -217,18 +199,18 @@ add_action( 'show_user_profile', 'extra_user_profile_fields' );
 add_action( 'edit_user_profile', 'extra_user_profile_fields' );
 
 function extra_user_profile_fields( $user ) { ?>
-	<h3><?php _e("Extra profile information", "blank"); ?></h3>
+		<h3><?php _e("Extra profile information", "blank"); ?></h3>
 
-	<table class="form-table">
+		<table class="form-table">
 		<tr>
-			<td>
-				<input type="text" name="parrent_rh_office" id="parrent_rh_office" value="<?php echo esc_attr( get_the_author_meta( 'parrent_rh_office', $user->ID ) ); ?>" class="regular-text" /><br />
-					<span class="description"><?php _e("Please enter your Red Hat Office City Name (eg. Brno, Boston, etc..)."); ?></span>
+				<td>
+						<input type="text" name="parrent_rh_office" id="parrent_rh_office" value="<?php echo esc_attr( get_the_author_meta( 'parrent_rh_office', $user->ID ) ); ?>" class="regular-text" /><br />
+						<span class="description"><?php _e("Please enter your Red Hat Office City Name (eg. Brno, Boston, etc..)."); ?></span>
 				</td>
 				<td>
 <select name="university">
-<?php
-	$selected = 0;
+<?php 	
+	$selected = 0;	
 	$generic_terms_place = get_terms(['taxonomy' => 'parrent_university', 'hide_empty' => false]);
 	foreach ($generic_terms_place as $generic_term_place) {
 		if ($generic_term_place->name != esc_attr(get_the_author_meta('university', $user->ID))) {
@@ -237,7 +219,7 @@ function extra_user_profile_fields( $user ) { ?>
 			$selected = 1;
 			echo '<option selected="selected" value="'.$generic_term_place->name.'">' . $generic_term_place->name . '</option>';
 		}
-                   }
+                   } 
 	if ($selected == 0) {
 		echo '<option selected="selected" value="Default">Default</option>';
 	}
@@ -251,20 +233,16 @@ function extra_user_profile_fields( $user ) { ?>
 				<input type="text" name="rh_team" id="rh_team" value="<?php echo esc_attr( get_the_author_meta( 'rh_team', $user->ID ) ); ?>" class="regular-text" /><br />
 				<span class="description"><?php _e("Your Team in Red Hat"); ?></span>
 			</td>
-			<td>
-				<input type="text" name="university" id="university" value="<?php echo esc_attr( get_the_author_meta( 'university', $user->ID ) ); ?>" class="regular-text" /><br />
-				<span class="description"><?php _e("Your university"); ?></span>
-			</td>
 		</tr>
-	</table>
+		</table>
 <?php }
 
 add_action( 'personal_options_update', 'save_extra_user_profile_fields' );
 add_action( 'edit_user_profile_update', 'save_extra_user_profile_fields' );
 
 function save_extra_user_profile_fields( $user_id ) {
-		if ( !current_user_can( 'edit_user', $user_id ) ) {
-				return false;
+		if ( !current_user_can( 'edit_user', $user_id ) ) { 
+				return false; 
 		}
 		update_user_meta( $user_id, 'parrent_rh_office', $_POST['parrent_rh_office'] );
 		update_user_meta( $user_id, 'university', $_POST['university'] );
@@ -276,7 +254,7 @@ function save_extra_user_profile_fields( $user_id ) {
 function research_register_form() {
 
 $university = ( ! empty( $_POST['university'] ) ) ? trim( $_POST['university'] ) : '';
-
+        
         ?>
         <p>
             <label for="university"><?php _e( 'University', 'mydomain' ) ?><br />
@@ -288,7 +266,7 @@ $university = ( ! empty( $_POST['university'] ) ) ? trim( $_POST['university'] )
 //2. Add validation. In this case, we make sure university is required. ... Not needed
 // add_filter( 'registration_errors', 'research_registration_errors', 10, 3 );
 function research_registration_errors( $errors, $sanitized_user_login, $user_email ) {
-
+        
         if ( empty( $_POST['university'] ) || ! empty( $_POST['university'] ) && trim( $_POST['university'] ) == '' ) {
             $errors->add( 'university_error', __( '<strong>ERROR</strong>: You must include your University.', 'mydomain' ) );
         }
@@ -306,15 +284,15 @@ function research_user_register( $user_id ) {
 
 
 // Registration Page logo
-function research_registration_logo() {
-	?>
-	<style type="text/css">
+function research_registration_logo() { 
+	?> 
+	<style type="text/css"> 
 	body.login div#login h1 a {
-	background-image: url(wp-content/themes/research-rh/rh_login_logo.png);
-	padding-bottom: 30px;
-	}
+	background-image: url(wp-content/themes/research-rh/rh_login_logo.png); 
+	padding-bottom: 30px; 
+	} 
 	</style>
-	<?php
+	<?php 
 	} add_action( 'login_enqueue_scripts', 'research_registration_logo' );
 
 // Widgets
