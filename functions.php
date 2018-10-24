@@ -79,6 +79,12 @@ function is_able_to_aprove($leader_id, $topic_id, $student_id) {
 		);
 
 	$my_query = new WP_Query($args);
+
+	// if ( role of actual user == administrator ) then return 1
+    if ( in_array( 'administrator', (array) $user->roles ) ) {
+		return 1;
+	}
+
 	while ($my_query->have_posts()) : $my_query->the_post();
 		if (get_the_title() == get_the_title($topic_id)) {
 			echo 'It looks like you have already approved this Thesis...<br/>';
@@ -99,7 +105,7 @@ function is_able_to_aprove($leader_id, $topic_id, $student_id) {
  * @param  [str] $status Was these approved("approved") or not("rejected")?
  * @return [int] Mailing status 0 => sending email failed, take care of error handling; 1 => mail was sent succesfully
 */
-function rh_mail_approval_result($topic_id, $thesis_id, $student_id, $status) {
+function rh_mail_approval_result($topic_id, $thesis_id, $student_id, $status, $leader_id)) {
 	$student_email = get_the_author_meta('email', $student_id);
 	if ($status == "approved") {
 		$headers = array('Content-Type: text/html; charset=UTF-8');
@@ -144,7 +150,7 @@ function spawn_these($post_id, $teacher_id, $student_id) {
 						'post_status'    => 'publish',
 						'comment_status' => $topic_post->comment_status,
 						'ping_status'    => $topic_post->ping_status,
-						'post_author'    => $student_id);
+						'post_author'    => $teacher_id);
 		$new_post_id = wp_insert_post($post);
 		// Copy post metadata
 		$data = get_post_custom($post_id);
