@@ -19,20 +19,32 @@ if (!is_numeric($_GET['student_id'])) {
 	die('Malformed url!');
 }
 
-$post_name_get = get_post( $_GET['topic_id'], ARRAY_A );
-$post_name = $post_name_get['post_name'];
+$teacher_id = get_author_post_id( $_GET['topic_id'] );
+$student_id = $_GET['student_id'];
+
+$user_info_taxonomy = get_userdata($student_id);
+$student_display_name= $user_info_taxonomy->display_name;
+
+$topic_id = $_GET['topic_id'];
+$post_name_get = get_post($_GET['topic_id']);
+$post_name = $post_name_get->post_name;
 ?>
 	<div id="primary" class="content-area col-sm-12">
 		<main id="main" class="site-main" role="main">
 			<?php if (isset($_GET['action'])) {
 				if ($_GET['action'] == 'approve') {
 					if (is_able_to_aprove(get_current_user_id(), $_GET['topic_id'], $_GET['student_id'])) {
-						$new_thesis_id = spawn_these($_GET['topic_id'], $_GET['student_id']);
+						$new_thesis_id = spawn_these($_GET['topic_id'], $teacher_id, $_GET['student_id']);
+
 						if ($new_thesis_id != -1) {
-							rh_mail_approval_result($_GET['topic_id'], $new_thesis_id, $_GET['student_id'], 'approved');
+							rh_mail_approval_result($_GET['topic_id'], $new_thesis_id, $_GET['student_id'], 'approved', $teacher_id);
 							echo '<strong>Thesis approved succesfully! You can close this page now.</strong>';
-							
-							global $wpdb;
+
+							// Functionality for saving display name of student into DB
+							$these_post_name = get_post_field( 'post_name', $new_thesis_id );
+							filtration_and_save_data($student_display_name, $these_post_name, $new_thesis_id, $student_id, $topic_id);
+
+							// Query for count +1 for filtration of topics
 							$sql_change = $wpdb->query("UPDATE wp_filtration SET approved_applicants=approved_applicants + 1 WHERE post_name='{$post_name}' AND post_type='diplomas'");
 						}
 					}
@@ -41,7 +53,7 @@ $post_name = $post_name_get['post_name'];
 					}
 				}
 				else if ($_GET['action'] == 'reject') {
-					rh_mail_approval_result($_GET['topic_id'], 0, $_GET['student_id'], 'rejected');
+					rh_mail_approval_result($_GET['topic_id'], 0, $_GET['student_id'], 'rejected', $teacher_id);
 					echo 'Thesis was rejected, you can approve it later via the link in email informing about new these application.';
 				}
 			}
@@ -63,8 +75,8 @@ $post_name = $post_name_get['post_name'];
 					<?php $actual_link = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]"; ?>
 					<div class="text-center">
 						<strong>You must be logged in to perform this action!</strong><br>
-						<a href="<?php echo wp_login_url( $actual_link ); ?>"><button class="btn btn-primary">Login</button></a><br/>	
-					</div>			
+						<a href="<?php echo wp_login_url( $actual_link ); ?>"><button class="btn btn-primary">Login</button></a><br/>
+					</div>
 			<?php } ?>
 	</main><!-- #main -->
 	</div><!-- #primary -->
