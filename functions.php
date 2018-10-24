@@ -105,7 +105,7 @@ function is_able_to_aprove($leader_id, $topic_id, $student_id) {
  * @param  [str] $status Was these approved("approved") or not("rejected")?
  * @return [int] Mailing status 0 => sending email failed, take care of error handling; 1 => mail was sent succesfully
 */
-function rh_mail_approval_result($topic_id, $thesis_id, $student_id, $status, $leader_id)) {
+function rh_mail_approval_result($topic_id, $thesis_id, $student_id, $status, $leader_id) {
 	$student_email = get_the_author_meta('email', $student_id);
 	if ($status == "approved") {
 		$headers = array('Content-Type: text/html; charset=UTF-8');
@@ -124,6 +124,11 @@ function rh_mail_approval_result($topic_id, $thesis_id, $student_id, $status, $l
 		}
 	}
 	return 0;
+}
+
+function get_author_post_id( $post_id = 0 ){
+     $post = get_post( $post_id );
+     return $post->post_author;
 }
 
 /**
