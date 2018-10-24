@@ -1,5 +1,5 @@
 <?php
-if (is_secure_ssl()) {
+/*if (is_secure_ssl()) {
     $redirect = 'https://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
     header('HTTP/1.1 301 Moved Permanently');
     header('Location: ' . $redirect);
@@ -10,6 +10,7 @@ if (!is_ssl()) {
     wp_redirect('https://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'], 301 );
     exit();
 }
+*/
 
 /**
  * The header for our theme.
