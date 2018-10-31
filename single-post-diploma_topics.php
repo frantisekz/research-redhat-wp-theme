@@ -145,14 +145,17 @@ get_header(); ?>
 								<p class="project-heading"><?php the_title(); ?></p>
 							</div>
 						</div>
-					<?php // Fetch post content
-						$content = get_post_field( 'post_content', get_the_ID() );
+					<?php
+						if (isset($merged_sql['active']) && $merged_sql['active'] == '1') {
+							// Fetch post content
+							$content = get_post_field( 'post_content', get_the_ID() );
 
-						// Get content parts
-						$content_parts = get_extended( $content );
+							// Get content parts
+							$content_parts = get_extended( $content );
 
-						// Output part before <!--more--> tag
-						echo $content_parts['main']; 
+							// Output part before <!--more--> tag
+							echo $content_parts['main'];
+						}
 					?>
 				<div style="visibility: hidden; position: absolute; bottom: 2.2em; font-size: 1.0em;">
 					<?php foreach ($terms_uni as $term) {
