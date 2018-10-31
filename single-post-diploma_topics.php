@@ -8,7 +8,7 @@
 get_header(); ?>
 
 	<div id="primary" class="content-area col-sm-12">
-		
+
 		<main id="main" class="site-main" role="main">
 			<h1 style="color: white;"><?php the_title(); ?></h1>
 	<section id="rnd-listing">
@@ -21,7 +21,7 @@ get_header(); ?>
 			<span class="caret"></span>
 		</button>
 		<ul class="dropdown-menu" aria-labelledby="university_drop_down">
-				<?php 
+				<?php
 				$generic_terms_place = get_terms(['taxonomy' => 'parrent_university', 'hide_empty' => false]);
 				foreach ($generic_terms_place as $generic_term_place) {
 					echo '<li onclick="trigger_box(' . $generic_term_place->term_id . ', 1)" class="university_drop_down" id="trigger-' . $generic_term_place->term_id . '"><a href="#">' . $generic_term_place->name . '</a></li>';
@@ -35,7 +35,7 @@ get_header(); ?>
 			<span class="caret"></span>
 		</button>
 		<ul class="dropdown-menu" aria-labelledby="spec_drop_down">
-				<?php 
+				<?php
 				$generic_terms_tags = get_terms(['taxonomy' => 'these_category', 'hide_empty' => false]);
 				foreach ($generic_terms_tags as $generic_term_tag) {
 					echo '<li onclick="trigger_box(' . $generic_term_tag->term_id . ', 0)" class="spec_drop_down" id="trigger-' . $generic_term_tag->term_id . '"><a href="#">' . $generic_term_tag->name . '</a></li>';
@@ -145,7 +145,15 @@ get_header(); ?>
 								<p class="project-heading"><?php the_title(); ?></p>
 							</div>
 						</div>
-				<?php the_excerpt(); ?>
+					<?php // Fetch post content
+						$content = get_post_field( 'post_content', get_the_ID() );
+
+						// Get content parts
+						$content_parts = get_extended( $content );
+
+						// Output part before <!--more--> tag
+						echo $content_parts['main']; 
+					?>
 				<div style="visibility: hidden; position: absolute; bottom: 2.2em; font-size: 1.0em;">
 					<?php foreach ($terms_uni as $term) {
 						echo '<i class="fa fa-university" aria-hidden="true"></i><span id="' . $term->term_id . '"';
