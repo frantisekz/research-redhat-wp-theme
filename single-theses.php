@@ -40,9 +40,22 @@ get_header(); ?>
 						$array = json_decode(json_encode($sql), True);
 						$leader_name = (string)($array[0]['display_name']);
 
+						// Here we are getting default name of student from wp_filtration
 						$sql = $wpdb->get_results("SELECT student FROM wp_filtration WHERE post_name='$post_name' AND post_type='theses'");
 						$array = json_decode(json_encode($sql), True);
-						$student_name = (string)($array[0]['student']);
+						$student_name_default = (string)($array[0]['student']);
+
+						// Here we are getting display name of student from wp_users
+						$sql = $wpdb->get_results("SELECT display_name FROM wp_users WHERE user_login='{$student_name_default}'");
+						$array = json_decode(json_encode($sql), True);
+						$student_display_name = (string)($array[0]['display_name']);
+						echo $student_display_name;
+
+						if ( isset($student_display_name) && $student_display_name != '0' ) {
+							$student_name = $student_display_name;
+						} else {
+							$student_name = $student_name_default;
+						}
 
 						?>
 			<section id="project_coordinator">
